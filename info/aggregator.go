@@ -93,11 +93,11 @@ func GetInfos(productIDs []int64, o Options) ([]Info, error) {
 					queryGroups[query].ids = append(queryGroups[query].ids, id)
 					queryGroups[query].props[id] = getter.prop
 				} else {
-					prps := make(map[int64]DataProp)
-					prps[id] = getter.prop
 					queryGroups[query] = &QueryGroup{
-						ids:   []int64{id},
-						props: prps,
+						ids: []int64{id},
+						props: map[int64]DataProp{
+							id: getter.prop,
+						},
 					}
 				}
 			}

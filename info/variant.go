@@ -16,7 +16,7 @@ func (r *VariantReg) New(productID int64) DataProp {
 
 	v.Query = `
 		SELECT product_id, parent_id, is_parent, is_variant, children_ids
-		FROM ws_product_tree
+		FROM db_product_tree
 		WHERE product_id IN (?)
 	`
 	v.Identifier = productID

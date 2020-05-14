@@ -14,7 +14,7 @@ func (r *BasicReg) New(productID int64) DataProp {
 
 	b.Query = `
 		SELECT product_id, shop_id, child_cat_id, name, short_desc
-		FROM ws_product
+		FROM db_product
 		WHERE product_id IN (?)
 	`
 	b.Identifier = productID

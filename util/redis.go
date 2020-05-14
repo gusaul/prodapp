@@ -73,13 +73,15 @@ func (r *RedisCache) MultiHashGetPipeline(keys map[string][]string) (map[string]
 	}
 
 	for _, v := range pairs {
-		data, err := redis.Strings(conn.Receive())
+		data, err := redis.Values(conn.Receive())
 		if err != nil {
 			return result, err
 		}
 		result[v.key] = make(map[string]string)
-		for i, f := range v.fields {
-			result[v.key][f] = data[i]
+		for i, val := range data {
+			if bytesVal, ok := val.([]byte); ok && len(v.fields) > i {
+				result[v.key][v.fields[i]] = string(bytesVal)
+			}
 		}
 	}
 

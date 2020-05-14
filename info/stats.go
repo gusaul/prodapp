@@ -14,7 +14,7 @@ func (r *StatsReg) New(productID int64) DataProp {
 
 	s.Query = `
 		SELECT product_id, transaction_success, transaction_reject, count_sold
-		FROM ws_product_stats
+		FROM db_product_stats
 		WHERE product_id IN (?)
 	`
 	s.Identifier = productID
